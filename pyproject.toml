@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rocks-db"
+version = "0.0.1"
+authors = [{ name = "Jinghan Zeng" }, { name = "Karan Tandon" }]
+dependencies = [
+    "matplotlib",
+    "msgspec",
+    "numpy",
+    "pandas[performance]",
+    "psutil",
+    "pydantic",
+    "rbloom",
+    "rich",
+]
+description = "RocksDB implementation for the COS 518 Project."
+license = { file = "LICENSE.txt" }
+readme = "README.md"
+keywords = ["rocksdb"]
+classifiers = ["Programming Language :: Python"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "F",      # Pyflakes
+    "E",      # pycodestyle (Error)
+    "I",      # isort
+    "D",      # pydocstyle
+    "UP",     # pyupgrade
+    "YTT",    # flake8-2020
+    "B",      # flake8-bugbear
+    "T10",    # flake8-debugger
+    "T20",    # flake8-print
+    "C4",     # flake8-comprehensions
+    "PERF",   # Perflint
+    "PIE",    # flake8-pie
+    "PYI006", # flake8-pyi
+    "PYI062", # flake8-pyi
+    "PYI063", # flake8-pyi
+    "PYI066", # flake8-pyi
+]
+ignore = [
+    "D105",
+    "D107",
+    "D205",
+    "D415",
+    "E501",
+    "B011",
+    "B028",
+    "B904",
+    "PIE804",
+]
+pydocstyle = { convention = "google" }
+
+[tool.ruff.lint.per-file-ignores]
+"experiments/*.py" = ["T201"]

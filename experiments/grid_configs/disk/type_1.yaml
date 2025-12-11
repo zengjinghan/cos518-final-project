@@ -1,0 +1,4 @@
+disk:
+  params:
+    type:
+      - in_memory

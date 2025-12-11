@@ -1,0 +1,3 @@
+lsm:
+  params:
+    max_l0_files: [4, 8, 12]
