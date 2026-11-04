@@ -1,0 +1,6 @@
+include LICENSE.txt README.md pyproject.toml uv.lock prek.toml .python-version
+recursive-include docs *.md
+recursive-include tests *.py
+recursive-include examples *.toml
+recursive-include tools *.py
+global-exclude __pycache__ *.py[cod]

@@ -1,0 +1,42 @@
+[[repos]]
+repo = "local"
+
+[[repos.hooks]]
+id = "format"
+name = "Ruff format"
+entry = "uv run --locked ruff format --check src tests tools"
+language = "system"
+pass_filenames = false
+always_run = true
+
+[[repos.hooks]]
+id = "lint"
+name = "Ruff lint"
+entry = "uv run --locked ruff check src tests tools"
+language = "system"
+pass_filenames = false
+always_run = true
+
+[[repos.hooks]]
+id = "types"
+name = "Strict Pyright"
+entry = "uv run --locked pyright"
+language = "system"
+pass_filenames = false
+always_run = true
+
+[[repos.hooks]]
+id = "tests"
+name = "Behavior and architecture"
+entry = "uv run --locked pytest"
+language = "system"
+pass_filenames = false
+always_run = true
+
+[[repos.hooks]]
+id = "secrets"
+name = "Native Betterleaks (no credential validation)"
+entry = "betterleaks dir --redact=100 --validation=false --no-banner src tests docs examples tools pyproject.toml uv.lock prek.toml MANIFEST.in .python-version README.md LICENSE.txt"
+language = "system"
+pass_filenames = false
+always_run = true

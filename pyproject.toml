@@ -1,61 +1,56 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "rocks-db"
-version = "0.0.1"
-authors = [{ name = "Jinghan Zeng" }, { name = "Karan Tandon" }]
-dependencies = [
-    "matplotlib",
-    "msgspec",
-    "numpy",
-    "pandas[performance]",
-    "psutil",
-    "pydantic",
-    "rbloom",
-    "rich",
-]
-description = "RocksDB implementation for the COS 518 Project."
-license = { file = "LICENSE.txt" }
+name = "educational-lsm-store"
+version = "1.0.0"
+description = "A persistent LSM key-value store with explicit storage formats and metrics."
 readme = "README.md"
-keywords = ["rocksdb"]
-classifiers = ["Programming Language :: Python"]
+requires-python = ">=3.12,<3.13"
+license = "MIT"
+dependencies = ["pydantic>=2.10,<3"]
+
+[project.scripts]
+lsm-store = "lsm_store.cli:main"
+lsm-bench = "lsm_bench.cli:main"
+
+[dependency-groups]
+dev = ["hypothesis>=6,<7", "pyright>=1.1.400,<2", "pytest>=8,<10", "ruff>=0.11,<1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+lsm_store = ["py.typed"]
+lsm_bench = ["py.typed"]
 
 [tool.ruff]
-line-length = 120
+target-version = "py312"
+line-length = 100
 
 [tool.ruff.lint]
-select = [
-    "F",      # Pyflakes
-    "E",      # pycodestyle (Error)
-    "I",      # isort
-    "D",      # pydocstyle
-    "UP",     # pyupgrade
-    "YTT",    # flake8-2020
-    "B",      # flake8-bugbear
-    "T10",    # flake8-debugger
-    "T20",    # flake8-print
-    "C4",     # flake8-comprehensions
-    "PERF",   # Perflint
-    "PIE",    # flake8-pie
-    "PYI006", # flake8-pyi
-    "PYI062", # flake8-pyi
-    "PYI063", # flake8-pyi
-    "PYI066", # flake8-pyi
-]
-ignore = [
-    "D105",
-    "D107",
-    "D205",
-    "D415",
-    "E501",
-    "B011",
-    "B028",
-    "B904",
-    "PIE804",
-]
-pydocstyle = { convention = "google" }
+select = ["ALL"]
+# Formatter conflicts, Google convention, contextual errors, and one canonical LICENSE.
+ignore = ["COM812", "ISC001", "D203", "D213", "EM101", "EM102", "TRY003", "CPY001"]
+pydocstyle.convention = "google"
 
 [tool.ruff.lint.per-file-ignores]
-"experiments/*.py" = ["T201"]
+"tests/**/*.py" = ["D", "S101", "PLR2004", "SLF001", "INP001"]
+"src/lsm_store/cli.py" = ["T201"]
+"src/lsm_bench/cli.py" = ["T201"]
+"tools/*.py" = ["INP001", "T201"]
+
+[tool.pyright]
+pythonVersion = "3.12"
+typeCheckingMode = "strict"
+include = ["src", "tests", "tools"]
+venvPath = "."
+venv = ".venv"
+reportUnnecessaryTypeIgnoreComment = "error"
+reportUnnecessaryCast = "error"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-config --strict-markers"
+filterwarnings = ["error"]

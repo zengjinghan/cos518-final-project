@@ -1,0 +1,30 @@
+measurement = "throughput"
+initial_state = "empty"
+warmup_operations = 0
+
+[store]
+memtable_bytes = 8192
+table_bytes = 8192
+block_bytes = 1024
+
+[store.compaction]
+kind = "leveled"
+max_l0_tables = 4
+level_bytes = 65536
+multiplier = 4
+
+[workload]
+operations = 3000
+keys = 4096
+key_bytes = 8
+value_bytes = 64
+key_stride = 1
+key_offset = 0
+scan_length = 16
+put_fraction = 1.0
+get_fraction = 0.0
+scan_fraction = 0.0
+seed = 42
+
+[workload.distribution]
+kind = "uniform"

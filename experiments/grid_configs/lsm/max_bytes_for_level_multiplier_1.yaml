@@ -1,3 +1,0 @@
-lsm:
-  params:
-    max_bytes_for_level_multiplier: [5, 10, 100]

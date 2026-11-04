@@ -1,0 +1,18 @@
+memtable_bytes = 4096
+table_bytes = 4096
+block_bytes = 512
+instrumentation = "counters"
+
+[compaction]
+kind = "leveled"
+max_l0_tables = 4
+level_bytes = 32768
+multiplier = 4
+
+[bloom]
+kind = "bloom"
+false_positive_rate = 0.01
+
+[read_cache]
+kind = "validated"
+capacity_bytes = 1048576

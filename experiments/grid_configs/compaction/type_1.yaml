@@ -1,5 +1,0 @@
-compaction:
-  params:
-    type:
-      - leveled
-      - tiered

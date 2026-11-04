@@ -1,0 +1,73 @@
+repetitions = 9
+measurements = ["throughput"]
+captures = ["off", "counters"]
+order_seed = 42
+budget_seconds = 120
+
+[[cases]]
+name = "resident_hit"
+
+[cases.scenario]
+initial_state = "resident"
+warmup_operations = 2000
+
+[cases.scenario.store]
+memtable_bytes = 1048576
+table_bytes = 8192
+block_bytes = 1024
+
+[cases.scenario.store.compaction]
+kind = "leveled"
+max_l0_tables = 4
+level_bytes = 65536
+multiplier = 4
+
+[cases.scenario.workload]
+operations = 200000
+keys = 256
+key_bytes = 8
+value_bytes = 64
+key_stride = 1
+key_offset = 0
+scan_length = 16
+put_fraction = 0.0
+get_fraction = 1.0
+scan_fraction = 0.0
+seed = 42
+
+[cases.scenario.workload.distribution]
+kind = "uniform"
+
+[[cases]]
+name = "table_hit"
+
+[cases.scenario]
+initial_state = "table"
+warmup_operations = 1000
+
+[cases.scenario.store]
+memtable_bytes = 8192
+table_bytes = 8192
+block_bytes = 1024
+
+[cases.scenario.store.compaction]
+kind = "leveled"
+max_l0_tables = 4
+level_bytes = 65536
+multiplier = 4
+
+[cases.scenario.workload]
+operations = 20000
+keys = 512
+key_bytes = 8
+value_bytes = 64
+key_stride = 2
+key_offset = 0
+scan_length = 16
+put_fraction = 0.0
+get_fraction = 1.0
+scan_fraction = 0.0
+seed = 42
+
+[cases.scenario.workload.distribution]
+kind = "uniform"

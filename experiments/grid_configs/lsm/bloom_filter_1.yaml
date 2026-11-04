@@ -1,9 +1,0 @@
-lsm:
-  params:
-    bloom_filter:
-      - type: bloom
-        args:
-          expected_items: 20000
-          false_positive_rate: 0.001
-      - type: set
-      - type: disabled

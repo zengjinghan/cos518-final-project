@@ -1,6 +1,0 @@
-workload:
-  params:
-    type:
-      - zipf
-      - skewed
-      - uniform
